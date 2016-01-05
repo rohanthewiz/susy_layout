@@ -7,6 +7,21 @@ $susy: (
   gutters: 1/5
 );
 
+$cols_18: (
+  global-box-sizing: border-box,
+  debug: (image: show),
+  columns: 18,
+  gutters: 1/4
+);
+
+$cols_7: (
+  global-box-sizing: border-box,
+  debug: (image: show),
+  columns: 7,
+  gutters: 1/6
+);
+
+
 @include border-box-sizing;
 
 body.homepage {
@@ -65,28 +80,27 @@ body.homepage {
     }
   }
 
-  @include nested(18) {
-    #lower-section {
-      @include susy-clearfix;
-      margin-top: gutter();
-      background-color: rgba(162, 204, 176, 0.6);
-      .promo {
-        @include span(4);
-        height: 100px;
-        text-align: center;
-        background-color: rgba(140, 216, 200, 0.6);
-        &:first-child {
-          margin-left: span(1) + gutter();
-        }
+  #lower-section {
+    @include layout($cols_18);
+    @include susy-clearfix;
+    margin-top: gutter();
+    background-color: rgba(162, 204, 176, 0.6);
+    .promo {
+      @include span(4);
+      height: 100px;
+      text-align: center;
+      background-color: rgba(140, 216, 200, 0.6);
+      &:first-child {
+        margin-left: span(1) + gutter();
       }
     }
   }
 
-  @include nested(7) {
-    #footer {
-      @include susy-clearfix;
-      margin-top: gutter();
-      background-color: rgba(192, 192, 180, 0.6);
+  #footer {
+    @include layout($cols_7);
+    @include susy-clearfix;
+    margin-top: gutter();
+    background-color: rgba(192, 192, 180, 0.6);
 
       .footer__item {
         @include span(1);
@@ -95,7 +109,6 @@ body.homepage {
           margin-left: span(2) + gutter();
         }
       }
-    }
   }
 
   @include nested(3) {
