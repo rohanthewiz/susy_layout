@@ -5,23 +5,7 @@ $susy: (
   global-box-sizing: border-box,
   debug: (image: show),
   columns: 12,
-  gutters: 1/5
-);
-
-// For 18 column layout
-$cols_18: (
-  global-box-sizing: border-box,
-  debug: (image: show),
-  columns: 18,
-  gutters: 1/4
-);
-
-// 7 Column layout
-$cols_7: (
-  global-box-sizing: border-box,
-  debug: (image: show),
-  columns: 7,
-  gutters: 1/6
+  gutters: 1/7
 );
 
 @include border-box-sizing; // box-sizing is best
@@ -87,39 +71,46 @@ body.homepage {
     }
   }
 
-  #lower-section {
-    @include layout($cols_18);
-    @include susy-clearfix;
-    margin-top: gutter();
-    background-color: rgba(162, 204, 176, 0.6);
-    .promo {
-      @include span(4);
-      height: 100px;
-      text-align: center;
-      background-color: rgba(140, 216, 200, 0.6);
-      &:first-child {
-        margin-left: span(1) + gutter();
+  @include with-layout(18 1/7) { // Temporarily change layout to 18 cols
+    #lower-section {
+      @include container;
+      @include susy-clearfix;
+      margin-top: gutter();
+      margin-bottom: gutter();
+      background-color: rgba(162, 204, 176, 0.6);
+      .promo {
+        @include span(4);
+        height: 100px;
+        text-align: center;
+        background-color: rgba(140, 216, 200, 0.6);
+        &:first-child {
+          margin-left: span(1) + gutter();
+        }
       }
     }
   }
 
-  #footer {
-    @include layout($cols_7);
-    @include susy-clearfix;
-    margin-top: gutter();
-    background-color: rgba(192, 192, 180, 0.6);
+  @include with-layout(7 1/6) { // Temporarily change to a 7 column layout
+    #footer {
+      @include container;
+      @include susy-clearfix;
+      //margin-top: gutter();
+      background-color: rgba(192, 192, 180, 0.6);
 
-    .footer__item {
-      @include span(1);
-      background-color: lighten(cadetblue, 5%);
-      &:first-child {
-        margin-left: span(2) + gutter();
+      .footer__item {
+        @include span(1);
+        background-color: lighten(cadetblue, 5%);
+        &:first-child {
+          margin-left: span(2) + gutter();
+        }
       }
     }
   }
 
-  @include nested(3) {
+  // This block uses a 3 column layout
+  @include with-layout(3 1/8) {
     #copyright {
+      @include container;
       @include susy-clearfix;
       font-family: Helvetica, Arial, sans-serif;
       background-color: black;
@@ -128,20 +119,23 @@ body.homepage {
       span {
         @include span(1);
         margin-left: span(1) + gutter();
+        text-align: center;
       }
     }
   }
 
+
+  // Mobile - back to twelve columns
   @media (max-width: 900px) {
-    @include layout($cols_7);
+    //@include layout($cols_7);
 
     #heading {
       .heading__logo {
         @include span(2);
       }
       .heading__top-nav--small {
-        display: block;
         @include span(1 last);
+        display: block;
         cursor: pointer;
       }
       .heading__top-nav {
