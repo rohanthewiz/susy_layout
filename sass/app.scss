@@ -109,13 +109,13 @@ body.homepage {
     margin-top: gutter();
     background-color: rgba(192, 192, 180, 0.6);
 
-      .footer__item {
-        @include span(1);
-        background-color: lighten(cadetblue, 5%);
-        &:first-child {
-          margin-left: span(2) + gutter();
-        }
+    .footer__item {
+      @include span(1);
+      background-color: lighten(cadetblue, 5%);
+      &:first-child {
+        margin-left: span(2) + gutter();
       }
+    }
   }
 
   @include nested(3) {
