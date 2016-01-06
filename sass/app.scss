@@ -1,5 +1,6 @@
 @import "susy/susy";
 
+// The susy map
 $susy: (
   global-box-sizing: border-box,
   debug: (image: show),
@@ -7,6 +8,7 @@ $susy: (
   gutters: 1/5
 );
 
+// For 18 column layout
 $cols_18: (
   global-box-sizing: border-box,
   debug: (image: show),
@@ -14,6 +16,7 @@ $cols_18: (
   gutters: 1/4
 );
 
+// 7 Column layout
 $cols_7: (
   global-box-sizing: border-box,
   debug: (image: show),
@@ -21,8 +24,8 @@ $cols_7: (
   gutters: 1/6
 );
 
+@include border-box-sizing; // box-sizing is best
 
-@include border-box-sizing;
 
 body.homepage {
   background-color: #876352;
@@ -46,11 +49,15 @@ body.homepage {
           display: inline-block;
           height: 100%;
           background-color: cornflowerblue;
+          cursor: pointer;
           &:last-child {
             float: right;
           }
         }
       }
+    }
+    .heading__top-nav--small {
+      display: none;
     }
   }
 
@@ -121,6 +128,24 @@ body.homepage {
       span {
         @include span(1);
         margin-left: span(1) + gutter();
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    @include layout($cols_7);
+
+    #heading {
+      .heading__logo {
+        @include span(2);
+      }
+      .heading__top-nav--small {
+        display: block;
+        @include span(1 last);
+        cursor: pointer;
+      }
+      .heading__top-nav {
+        display: none;
       }
     }
   }
